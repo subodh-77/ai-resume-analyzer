@@ -37,3 +37,9 @@ ai-resume-analyzer/
 ## Run
 python -m pip install -r requirements.txt
 python -m streamlit run app.py
+
+## 👨‍💻 Author
+Subodh Pathak
+📍 Uttarakhand, India
+🔗 https://www.linkedin.com/in/subodh-pathak-202915207
+🔗 https://github.com/subodh-77
