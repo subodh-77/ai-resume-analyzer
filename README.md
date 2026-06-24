@@ -1,4 +1,4 @@
-**AI Resume Analyzer with Smart Skill Detection**
+##**AI Resume Analyzer with Smart Skill Detection**
 📌 Overview
 This project is an AI-powered Resume Analyzer that evaluates how well a resume matches a given job description. It uses Natural Language Processing (NLP) techniques to identify missing skills, infer hidden requirements, and provide actionable suggestions to improve resume quality.
 
