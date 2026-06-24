@@ -34,3 +34,6 @@ ai-resume-analyzer/
 │   ├── resume.txt
 │   └── job.txt
 └── README.md
+## Run
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
