@@ -1,8 +1,8 @@
 # AI Resume Analyzer with Smart Skill Detection
-#📌 Overview
+##📌 Overview
 This project is an AI-powered Resume Analyzer that evaluates how well a resume matches a given job description. It uses Natural Language Processing (NLP) techniques to identify missing skills, infer hidden requirements, and provide actionable suggestions to improve resume quality.
 
-#🔥 Features
+##🔥 Features
 ✅ Resume-job matching using TF-IDF + Cosine Similarity
 ✅ ATS Score calculation (simulating real hiring systems)
 ✅ Fuzzy matching to handle typos (e.g., "javscript" → "javascript")
@@ -13,7 +13,7 @@ This project is an AI-powered Resume Analyzer that evaluates how well a resume m
 ✅ Suggest relevant courses for improvement
 ✅ Upload PDF/TXT resume + paste job description
 
-#🧠 Tech Stack
+##🧠 Tech Stack
 
 Python
 Streamlit – UI
@@ -23,7 +23,7 @@ FuzzyWuzzy – fuzzy matching
 NLP techniques – text normalization, preprocessing
 
 
-#📂 Project Structure
+##📂 Project Structure
 ai-resume-analyzer/
 │
 ├── app.py              # Main Streamlit application
