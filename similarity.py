@@ -1,13 +1,29 @@
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import cosine_similarity
-
-
+important_skills = {
+    "java", "python", "c++",
+    "dsa", "algorithms",
+    "data", "structures",
+    "oop", "dbms", "os",
+    "sql", "database",
+    "computer", "networks",
+    "git", "github",
+    "aws", "docker",
+    "system", "design",
+    "api", "mongodb",
+    "react", "javascript",
+    "html", "css",
+    "node", "microservices"
+}
 def calculate_similarity(resume_text, job_text):
-    documents = [resume_text, job_text]
 
-    vectorizer = TfidfVectorizer(stop_words='english')
-    vectors = vectorizer.fit_transform(documents)
+    resume_words = set(resume_text.lower().split())
 
-    similarity_score = cosine_similarity(vectors[0], vectors[1])[0][0]
+    job_words = {
+        word for word in job_text.lower().split()
+        if word in important_skills
+    }
 
-    return round(similarity_score * 100, 2)
+    common = resume_words & job_words
+
+    score = (len(common) / max(len(job_words), 1)) * 100
+
+    return round(score, 2)

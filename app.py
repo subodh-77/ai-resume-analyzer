@@ -1,12 +1,15 @@
 import streamlit as st
 from similarity import calculate_similarity
 from utils import (
-    smart_missing_skills,   
+    smart_missing_skills,
     highlight_missing_words,
     suggest_courses,
     expand_hidden_skills,
     calculate_ats_score,
-    role_based_missing_skills
+    role_based_missing_skills,
+    generate_resume_summary,
+    generate_interview_questions,
+    improve_resume_bullets
 )
 import PyPDF2
 
@@ -14,6 +17,8 @@ st.set_page_config(page_title="AI Resume Analyzer", layout="centered")
 
 st.title("🚀 AI Resume Analyzer")
 st.write("Upload Resume & Job Description with Smart Analysis")
+
+
 
 # ✅ ROLE SELECTION (UPDATED + Frontend added)
 role = st.selectbox("🎯 Select Job Role", ["SDE", "ML", "Backend", "Frontend"])
@@ -78,9 +83,6 @@ if st.button("Analyze Resume"):
 
         ats_score = calculate_ats_score(resume_text, enhanced_job_text)
 
-        # ✅ ROLE-BASED
-        role_missing = role_based_missing_skills(resume_text, role)
-
         # ✅ EXTRA FEATURES
         highlighted_resume = highlight_missing_words(resume_text, missing)
         courses = suggest_courses(missing)
@@ -93,12 +95,12 @@ if st.button("Analyze Resume"):
         col2.metric("ATS Score", f"{ats_score}/100")
 
         # ✅ FIXED CONDITION (IMPORTANT)
-        if score > 75:
-            st.success("Strong match!")
-        elif score > 50:
-            st.warning("Moderate match")
+        if ats_score >= 85:
+            st.success("Excellent match! ✅")
+        elif ats_score >= 70:
+            st.warning("Good match ⚠️")
         else:
-            st.error("Low match!")
+            st.error("Needs improvement ❌")
 
         # ✅ HIDDEN SKILLS
         st.subheader("🧠 Hidden (Inferred) Skills")
@@ -108,18 +110,6 @@ if st.button("Analyze Resume"):
                 st.write("•", skill)
         else:
             st.write("No hidden skills detected")
-
-        # ✅ ROLE-BASED
-        st.subheader(f"🎯 Missing Skills for {role} Role")
-        if role_missing:
-            for skill in role_missing:
-                st.write("•", skill)
-        else:
-            st.write("No major skills missing ✅")
-
-        # ✅ HIGHLIGHTED RESUME
-        st.subheader("📝 Resume with Missing Skills Highlighted")
-        st.markdown(highlighted_resume, unsafe_allow_html=True)
 
         # ✅ SMART MISSING
         st.subheader("❌ Missing Skills (Smart Matching)")
@@ -134,5 +124,39 @@ if st.button("Analyze Resume"):
         else:
             st.write("No suggestions needed ✅")
 
+        # ============================
+        # AI GENERATED RESUME SUMMARY
+        # ============================
+
+        st.subheader("📋 AI Resume Summary")
+
+        with st.spinner("Generating summary..."):
+            summary = generate_resume_summary(resume_text)
+
+        st.write(summary)
+
+        # ============================
+        # AI INTERVIEW QUESTIONS
+        # ============================
+
+        st.subheader("🎤 AI Interview Questions")
+
+        with st.spinner("Generating interview questions..."):
+            questions = generate_interview_questions(resume_text)
+
+        st.write(questions)
+
+        # ============================
+        # AI RESUME IMPROVEMENTS
+        # ============================
+
+        st.subheader("✨ AI Resume Improvement Suggestions")
+
+        with st.spinner("Improving resume content..."):
+            improved_resume = improve_resume_bullets(resume_text)
+
+        st.write(improved_resume)
+
     else:
         st.warning("⚠️ Upload resume and provide job description!")
+        
